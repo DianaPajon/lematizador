@@ -135,6 +135,19 @@ public class Lematizador {
         }
         return lemas;
     }
+
+    public void setRelacionesLexicograficas(Set<Relationship<Word, Word>> relacionesLexicograficas) {
+        this.relacionesLexicograficas = relacionesLexicograficas;
+    }
+
+    public Set<Word> getPalabras() {
+        return palabras;
+    }
+
+    public void setPalabras(Set<Word> palabras) {
+        this.palabras = palabras;
+    }
+
     
     public Set<SynSet> relacionSemantica(String relacion, SynSet origen){
         Set<SynSet> lemas = new HashSet<>();
