@@ -40,12 +40,36 @@ public class Relationship<A,B> {
         this.elementos = new HashSet<>();
     }
     
-    private void addElement(Pair<A,B> elemento){
+    public void addElement(Pair<A,B> elemento){
         this.elementos.add(elemento);
     }
     
-    private boolean checkElement(Pair<A,B> elemento){
+    public boolean checkElement(Pair<A,B> elemento){
         return this.elementos.contains(elemento);
+    }
+    
+    public Set<Pair<A,B>> getElementos(){
+        return elementos;
+    }
+    
+    public Set<A> getPreimagen(B elemento){
+        Set<A> preimagen = new HashSet<>();
+        for(Pair<A,B> par : this.elementos){
+            if(par.getSecond().equals(elemento)){
+                preimagen.add(par.getFirst());
+            }
+        }
+        return preimagen;
+    }
+    
+    public Set<B> getImagen(A elemento){
+        Set<B> imagen = new HashSet<>();
+        for(Pair<A,B> par : this.elementos){
+            if(par.getFirst().equals(elemento)){
+                imagen.add(par.getSecond());
+            }
+        }
+        return imagen;
     }
     
     public static <X,Y> void addElement(Set<Relationship <X,Y>> relaciones, String nombre, Pair<X,Y> elemento){

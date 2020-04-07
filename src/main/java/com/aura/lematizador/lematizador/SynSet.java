@@ -41,7 +41,7 @@ public class SynSet {
     @Override
     public boolean equals(Object o){
         if(o instanceof SynSet){
-            return ((SynSet) o).getLema() == this.getLema();
+            return ((SynSet) o).getLema().toUpperCase() == this.getLema().toUpperCase();
         }
         else
             return false;

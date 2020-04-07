@@ -5,6 +5,8 @@
  */
 package com.aura.lematizador.lematizador;
 
+import java.util.Objects;
+
 /**
  *
  * @author diana
@@ -23,5 +25,16 @@ public class Word {
         this.palabra = palabra;
     }
     
+    @Override
+    public boolean equals(Object o){
+        if(o instanceof Word){
+            return Objects.equals(((Word) o).getPalabra().toUpperCase(), this.palabra.toUpperCase());
+        }
+        return false;
+    }
     
+    @Override
+    public int hashCode(){
+        return this.palabra.hashCode();
+    }
 }

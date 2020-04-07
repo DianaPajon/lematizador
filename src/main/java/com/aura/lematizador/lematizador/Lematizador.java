@@ -120,43 +120,44 @@ public class Lematizador {
         }
         //Ahora, teniendo los todo, genero el lematizador.
         
-        this.setLemas(new HashSet(synsets.values()));
-        this.setPalabras(new HashSet(words.values()));
-        this.setRelacionesLexicograficas(relacionesLexicograficas);
-        this.setRelacionesSemanticas(relacionesSemanticas);
-    }
-
-    public Set<SynSet> getLemas() {
-        return lemas;
-    }
-
-    public void setLemas(Set<SynSet> lemas) {
-        this.lemas = lemas;
-    }
-
-    public Set<Relationship<SynSet, SynSet>> getRelacionesSemanticas() {
-        return relacionesSemanticas;
-    }
-
-    public void setRelacionesSemanticas(Set<Relationship<SynSet, SynSet>> relacionesSemanticas) {
+        this.lemas = new HashSet(synsets.values());
+        this.palabras = new HashSet(words.values());
+        this.relacionesLexicograficas = relacionesLexicograficas;
         this.relacionesSemanticas = relacionesSemanticas;
     }
 
-    public Set<Relationship<Word, Word>> getRelacionesLexicograficas() {
-        return relacionesLexicograficas;
+    public Set<SynSet> encontrarLema(Word w){
+        Set<SynSet> lemas = new HashSet<>();
+        for(SynSet s : this.lemas){
+            if(s.getInstancias().contains(w)){
+                lemas.add(s);
+            }
+        }
+        return lemas;
     }
-
-    public void setRelacionesLexicograficas(Set<Relationship<Word, Word>> relacionesLexicograficas) {
-        this.relacionesLexicograficas = relacionesLexicograficas;
+    
+    public Set<SynSet> relacionSemantica(String relacion, SynSet origen){
+        Set<SynSet> lemas = new HashSet<>();
+        for(Relationship<SynSet, SynSet> rel : relacionesSemanticas){
+            if(rel.getNombreDirecto().equals(relacion)){
+                lemas.addAll(rel.getImagen(origen));
+            } else if (rel.getNombreInversa().equals(relacion)){
+                lemas.addAll(rel.getPreimagen(origen));
+            }
+        }
+        return lemas;
     }
-
-    public Set<Word> getPalabras() {
+    
+    
+    public Set<Word> relacionLexicografica(String relacion, Word origen){
+        Set<Word> palabras = new HashSet<>();
+        for(Relationship<Word, Word> rel : relacionesLexicograficas){
+            if(rel.getNombreDirecto().equals(relacion)){
+                palabras.addAll(rel.getImagen(origen));
+            } else if (rel.getNombreInversa().equals(relacion)){
+                palabras.addAll(rel.getPreimagen(origen));
+            }
+        }
         return palabras;
     }
-
-    public void setPalabras(Set<Word> palabras) {
-        this.palabras = palabras;
-    }
-
-    
 }

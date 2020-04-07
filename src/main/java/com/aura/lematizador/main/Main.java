@@ -7,6 +7,8 @@ package com.aura.lematizador.main;
 
 //import java.io.BufferedReader;
 import com.aura.lematizador.lematizador.Lematizador;
+import com.aura.lematizador.lematizador.SynSet;
+import com.aura.lematizador.lematizador.Word;
 import java.io.File;
 import java.io.IOException;
 import javax.xml.parsers.DocumentBuilder;
@@ -24,9 +26,6 @@ public class Main {
     public static void main(String[] args) throws IOException, ParserConfigurationException, SAXException{
         //BufferedReader in = new BufferedReader(new InputStreamReader(System.in));   
         //String cfgPath = in.readLine();
-        for(int i=0;i<args.length;i++){
-            System.out.println(args[i]);
-        }
         String cfgPath = args[0];
         File cfgFile = new File(cfgPath);
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -35,7 +34,13 @@ public class Main {
         
 //Inicializo todas las relaciones.
         Lematizador lem = new Lematizador(doc);
-        System.out.println(lem);
+        for(SynSet s : lem.encontrarLema(new Word("claro"))){
+            System.out.println(s.getLema());
+        };
+        
+        for(Word s : lem.relacionLexicografica("antonimo", new Word("Claro"))){
+            System.out.println(s.getPalabra());
+        }
     }
     
 
