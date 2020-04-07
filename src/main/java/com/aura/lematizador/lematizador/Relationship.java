@@ -51,9 +51,9 @@ public class Relationship<A,B> {
     public static <X,Y> void addElement(Set<Relationship <X,Y>> relaciones, String nombre, Pair<X,Y> elemento){
         for(Relationship rel: relaciones){
             int tipo = 0;
-            if(rel.getNombreDirecto() == nombre){
+            if(rel.getNombreDirecto().equals(nombre)){
                 tipo = 1;
-            } else if(rel.getNombreInversa() == nombre) {
+            } else if(rel.getNombreInversa().equals(nombre)) {
                 tipo = 2;
             }
             if(tipo == 1){
