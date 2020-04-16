@@ -27,7 +27,7 @@ public class Main {
         //BufferedReader in = new BufferedReader(new InputStreamReader(System.in));   
         //String cfgPath = in.readLine();
         String cfgPath = args[0];
-        File cfgFile = new File(cfgPath);
+        File cfgFile = new File("resources/diccionarioSimple.xml");
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 	DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 	Document doc = (Document) dBuilder.parse(cfgFile);

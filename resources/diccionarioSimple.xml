@@ -1,0 +1,19 @@
+<diccionario>
+	<relacion tipo="sem" directa="meronimo" inversa="hiperonimo"/>
+	<relacion tipo="sem" directa="lalalanimo" inversa="miminimo"/>
+	<relacion tipo="lex" directa="antonimo"/>
+	<synset lema="automovil-01">
+		<sem lema="rueda-01" relacion="meronimo"/>
+		<word lex="coche" />
+		<word lex="auto" />
+	</synset>
+	<synset lema="claro">
+		<word lex="claro">
+			<lex word="oscuro" relacion="antonimo" />
+		</word>
+	</synset>
+	<synset lema="oscuro">
+		<word lex="oscuro">
+		</word>
+	</synset>
+</diccionario>
