@@ -64,7 +64,7 @@ public class Lematizador {
             Node synsetNode = synsetlist.item(i);
             NamedNodeMap atributos = synsetNode.getAttributes();
             String nombreLema = atributos.getNamedItem("lema").getNodeValue();
-            String familiaLema = atributos.getNamedItem("family").getNodeValue();
+            String familiaLema = atributos.getNamedItem("type").getNodeValue();
             Set<Word> synSetWords = new HashSet();
             for(int j = 0; j < synsetNode.getChildNodes().getLength(); j++){
                 Node nodo = synsetNode.getChildNodes().item(j);

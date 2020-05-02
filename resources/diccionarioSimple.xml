@@ -8,17 +8,17 @@ and open the template in the editor.
 	<relacion tipo="sem" directa="meronimo" inversa="hiperonimo"/>
 	<relacion tipo="sem" directa="lalalanimo" inversa="miminimo"/>
 	<relacion tipo="lex" directa="antonimo"/>
-	<synset lema="automovil-01" family="sustantivo">
+	<synset lema="automovil-01" type="sustantivo">
 		<sem lema="rueda-01" relacion="meronimo"/>
 		<word lex="coche" />
 		<word lex="auto" />
 	</synset>
-	<synset lema="claro" family="adjetivo">
+	<synset lema="claro" type="adjetivo">
 		<word lex="claro">
 			<lex word="oscuro" relacion="antonimo" />
 		</word>
 	</synset>
-	<synset lema="oscuro" family="adjetivo">
+	<synset lema="oscuro" type="adjetivo">
 		<word lex="oscuro">
 		</word>
 	</synset>
