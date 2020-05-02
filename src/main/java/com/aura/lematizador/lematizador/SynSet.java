@@ -15,6 +15,7 @@ import java.util.Set;
 public class SynSet {
     private String lema;
     private Collection<Word> instancias;
+    private String clase;
     
     public SynSet(String lema){
         this.lema = lema;
@@ -37,11 +38,21 @@ public class SynSet {
     public void setInstancias(Collection<Word> instancias) {
         this.instancias = instancias;
     }
+
+    public String getClase() {
+        return clase;
+    }
+
+    public void setClase(String clase) {
+        this.clase = clase;
+    }
+    
+    
     
     @Override
     public boolean equals(Object o){
         if(o instanceof SynSet){
-            return ((SynSet) o).getLema().toUpperCase() == this.getLema().toUpperCase();
+            return ((SynSet) o).getLema().toUpperCase() == this.getLema().toUpperCase() && ((SynSet) o).getClase().toUpperCase() == this.getClase().toUpperCase();
         }
         else
             return false;

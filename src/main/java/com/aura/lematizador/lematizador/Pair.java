@@ -53,4 +53,9 @@ public class Pair<T,U> {
         }
         return false;
     }
+    
+    @Override
+    public String toString(){
+        return "(" + this.first.toString() + " , " + this.second.toString() + ")";
+    }
 }
