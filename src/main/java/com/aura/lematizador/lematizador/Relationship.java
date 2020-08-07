@@ -5,6 +5,7 @@
  */
 package com.aura.lematizador.lematizador;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -54,14 +55,15 @@ public class Relationship<A> {
         return elementos;
     }
     
-    public Set<A> getPreimagen(A elemento){
-        Set<A> preimagen = new HashSet<>();
+    
+    
+    public A getPreimagen(A elemento){
         for(Pair<A,A> par : this.elementos){
             if(par.getSecond().equals(elemento)){
-                preimagen.add(par.getFirst());
+                return par.getFirst();
             }
         }
-        return preimagen;
+        return null;
     }
     
     public Set<A> getImagen(A elemento){
@@ -93,7 +95,7 @@ public class Relationship<A> {
         }
     }
     
-    public int profunidad(A elemento) {
+    public int profundidad(A elemento) {
     	return 0;
     }
     

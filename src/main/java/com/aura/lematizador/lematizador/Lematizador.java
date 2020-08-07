@@ -160,7 +160,7 @@ public class Lematizador {
             if(rel.getNombreDirecto().equals(relacion)){
                 lemas.addAll(rel.getImagen(origen));
             } else if (rel.getNombreInversa().equals(relacion)){
-                lemas.addAll(rel.getPreimagen(origen));
+                lemas.add(rel.getPreimagen(origen));
             }
         }
         return lemas;
@@ -173,7 +173,7 @@ public class Lematizador {
             if(rel.getNombreDirecto().equals(relacion)){
                 palabras.addAll(rel.getImagen(origen));
             } else if (rel.getNombreInversa().equals(relacion)){
-                palabras.addAll(rel.getPreimagen(origen));
+                palabras.add(rel.getPreimagen(origen));
             }
         }
         return palabras;
