@@ -26,7 +26,7 @@ public class Main {
     public static void main(String[] args) throws IOException, ParserConfigurationException, SAXException{
         //BufferedReader in = new BufferedReader(new InputStreamReader(System.in));   
         //String cfgPath = in.readLine();
-        String cfgPath = args[0];
+        //String cfgPath = args[0];
         File cfgFile = new File("resources/diccionarioSimple.xml");
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 	DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -41,6 +41,7 @@ public class Main {
         for(Word s : lem.relacionLexicografica("antonimo", new Word("Claro"))){
             System.out.println(s.getPalabra());
         }
+        
     }
     
 

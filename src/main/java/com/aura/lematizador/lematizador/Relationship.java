@@ -12,7 +12,9 @@ import java.util.Set;
  *
  * @author diana
  */
-public class Relationship<A,B> {
+
+//Relaciones entre elementos de un mismo tipo.
+public class Relationship<A> {
 
     public String getNombreDirecto() {
         return nombreDirecto;
@@ -32,7 +34,7 @@ public class Relationship<A,B> {
     private String nombreDirecto;
     private String nombreInversa;
     
-    private Set<Pair<A,B>> elementos;
+    private Set<Pair<A,A>> elementos;
     
     public Relationship(String nombreDirecto, String nombreInverso){
         this.nombreDirecto = nombreDirecto;
@@ -40,21 +42,21 @@ public class Relationship<A,B> {
         this.elementos = new HashSet<>();
     }
     
-    public void addElement(Pair<A,B> elemento){
+    public void addElement(Pair<A,A> elemento){
         this.elementos.add(elemento);
     }
     
-    public boolean checkElement(Pair<A,B> elemento){
+    public boolean checkElement(Pair<A,A> elemento){
         return this.elementos.contains(elemento);
     }
     
-    public Set<Pair<A,B>> getElementos(){
+    public Set<Pair<A,A>> getElementos(){
         return elementos;
     }
     
-    public Set<A> getPreimagen(B elemento){
+    public Set<A> getPreimagen(A elemento){
         Set<A> preimagen = new HashSet<>();
-        for(Pair<A,B> par : this.elementos){
+        for(Pair<A,A> par : this.elementos){
             if(par.getSecond().equals(elemento)){
                 preimagen.add(par.getFirst());
             }
@@ -62,9 +64,9 @@ public class Relationship<A,B> {
         return preimagen;
     }
     
-    public Set<B> getImagen(A elemento){
-        Set<B> imagen = new HashSet<>();
-        for(Pair<A,B> par : this.elementos){
+    public Set<A> getImagen(A elemento){
+        Set<A> imagen = new HashSet<>();
+        for(Pair<A,A> par : this.elementos){
             if(par.getFirst().equals(elemento)){
                 imagen.add(par.getSecond());
             }
@@ -72,7 +74,7 @@ public class Relationship<A,B> {
         return imagen;
     }
     
-    public static <X,Y> void addElement(Set<Relationship <X,Y>> relaciones, String nombre, Pair<X,Y> elemento){
+    public static <X,Y> void addElement(Set<Relationship <X>> relaciones, String nombre, Pair<X,X> elemento){
         for(Relationship rel: relaciones){
             int tipo = 0;
             if(rel.getNombreDirecto().equals(nombre)){
@@ -90,4 +92,9 @@ public class Relationship<A,B> {
             }
         }
     }
+    
+    public A getAncestroComun(Relationship<A> relacion, A elemento1, A elemento2) {
+    	return null;
+    }
+    
 }
