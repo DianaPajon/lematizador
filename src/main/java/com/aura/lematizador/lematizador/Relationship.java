@@ -5,8 +5,11 @@
  */
 package com.aura.lematizador.lematizador;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -96,11 +99,81 @@ public class Relationship<A> {
     }
     
     public int profundidad(A elemento) {
-    	return 0;
+    	int profundidad = 0;
+    	A a = this.getPreimagen(elemento);{
+    		a = this.getPreimagen(a);
+    		profundidad++;
+    	}
+    	return profundidad;
     }
     
     
-    public A getAncestroComun(A elemento1, A elemento2) {
+    public A getMenorAncestroComun(A elemento1, A elemento2) {
+    	List<A> ancestros1 = new ArrayList<A>(Arrays.asList(elemento1));
+    	List<A> ancestros2 =new ArrayList<A>(Arrays.asList(elemento2));
+    	
+    	A preimagen1 = this.getPreimagen(elemento1);
+    	while(preimagen1 != null) {
+    		ancestros1.add(preimagen1);
+    	}
+    	
+    	A preimagen2 = this.getPreimagen(elemento2);
+    	while(preimagen2 != null) {
+    		ancestros2.add(preimagen2);
+    	}
+    	
+    	if(ancestros1.size() == 1) {
+    		if(ancestros2.size() == 1) {
+    			if(elemento1.equals(elemento2)) {
+    				return elemento1;
+    			}else {
+    				//Esto debería pasar?
+    				return null;
+    			}
+    		}
+    		if(ancestros2.contains(elemento1)) {
+    			return elemento1;
+    		} else {
+				//Esto debería pasar?
+				return null;
+    			
+    		}
+    	}
+    	
+    	if(ancestros2.size() == 1) {
+    		if(ancestros1.size() == 1) {
+    			if(elemento1.equals(elemento2)) {
+    				return elemento1;
+    			}else {
+    				//Esto debería pasar?
+    				return null;
+    			}
+    		}
+    		if(ancestros1.contains(elemento1)) {
+    			return elemento2;
+    		} else {
+    			//Esto debería pasar?
+    			return null;
+    			
+    		}
+    		
+    	}
+    	
+    	/*
+    	 * El primer elemento común, es el primer elemento de ancestros1 que está también en ancestros2?
+    	 * Supongamos que fuera otro, X, ese estaría ANTES den ancestros1 y en ancestros 2. Por lo tanto, es un absurdo.
+    	 * Es el primero que vemos.
+    	 * 
+    	 * (Ponele)
+    	 * 
+    	 * (Cuadrático no es taaaaaan malo, ¿cuanta profunidad pueden tener estos árboles?)
+    	 */
+    	for(A elemento : ancestros1) {
+    		if(ancestros2.contains(elemento)) {
+    			return elemento;
+    		}
+    	}
+    	
     	return null;
     }
     
