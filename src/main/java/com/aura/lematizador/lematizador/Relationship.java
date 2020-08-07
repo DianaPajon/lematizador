@@ -79,7 +79,7 @@ public class Relationship<A> {
         return imagen;
     }
     
-    public static <X,Y> void addElement(Set<Relationship <X>> relaciones, String nombre, Pair<X,X> elemento){
+    public static <X> void addElement(Set<Relationship <X>> relaciones, String nombre, Pair<X,X> elemento){
         for(Relationship rel: relaciones){
             int tipo = 0;
             if(rel.getNombreDirecto().equals(nombre)){
@@ -108,7 +108,7 @@ public class Relationship<A> {
     }
     
     
-    public A getMenorAncestroComun(A elemento1, A elemento2) {
+    public A getMayorAncestroComun(A elemento1, A elemento2) {
     	List<A> ancestros1 = new ArrayList<A>(Arrays.asList(elemento1));
     	List<A> ancestros2 =new ArrayList<A>(Arrays.asList(elemento2));
     	
