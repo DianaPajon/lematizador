@@ -93,7 +93,12 @@ public class Relationship<A> {
         }
     }
     
-    public A getAncestroComun(Relationship<A> relacion, A elemento1, A elemento2) {
+    public int profunidad(A elemento) {
+    	return 0;
+    }
+    
+    
+    public A getAncestroComun(A elemento1, A elemento2) {
     	return null;
     }
     
