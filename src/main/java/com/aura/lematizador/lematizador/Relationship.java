@@ -17,7 +17,8 @@ import java.util.Set;
  * @author diana
  */
 
-//Relaciones entre elementos de un mismo tipo.
+//Relaciones de orden entre elementos de un mismo tipo.
+//TODO: buscar la forma de representar eficientemente un látice.
 public class Relationship<A> {
 
     public String getNombreDirecto() {
@@ -60,13 +61,14 @@ public class Relationship<A> {
     
     
     
-    public A getPreimagen(A elemento){
+    public Set<A> getPreimagen(A elemento){
+        Set<A> imagen = new HashSet<>();
         for(Pair<A,A> par : this.elementos){
             if(par.getSecond().equals(elemento)){
-                return par.getFirst();
+                imagen.add(par.getFirst());
             }
         }
-        return null;
+        return imagen;
     }
     
     public Set<A> getImagen(A elemento){
@@ -99,10 +101,22 @@ public class Relationship<A> {
     }
     
     public int profundidad(A elemento) {
+    	Set<A> preImagen = this.getPreimagen(elemento);
+    	if(preImagen.equals(Collections.emptySet())) {
+    		return 0;
+    	}
     	int profundidad = 0;
-    	A a = this.getPreimagen(elemento);{
-    		a = this.getPreimagen(a);
-    		profundidad++;
+    	Set<Set<A>> siguienteNivel = new HashSet<Set<A>>();
+    	siguienteNivel.add(preImagen);
+    	while(siguienteNivel.stream().allMatch(s->!s.equals(Collections.emptySet()))){
+    		Set<Set<A>> nuevoNivel = new HashSet<Set<A>>();
+			for(Set<A> x:siguienteNivel ) {
+				for(A a:x) {
+					nuevoNivel.add(this.getPreimagen(a));
+				}
+			}
+			siguienteNivel = nuevoNivel;
+			profundidad++;
     	}
     	return profundidad;
     }
@@ -112,14 +126,25 @@ public class Relationship<A> {
     	List<A> ancestros1 = new ArrayList<A>(Arrays.asList(elemento1));
     	List<A> ancestros2 =new ArrayList<A>(Arrays.asList(elemento2));
     	
-    	A preimagen1 = this.getPreimagen(elemento1);
-    	while(preimagen1 != null) {
-    		ancestros1.add(preimagen1);
+    	Set<A> siguienteNivel = this.getPreimagen(elemento1);
+    	while(!siguienteNivel.equals(Collections.emptySet())) {
+    		ancestros1.addAll(siguienteNivel);
+    		Set<A> nuevoNivel = new HashSet<>();
+    		for(A a : siguienteNivel) {
+    			nuevoNivel.addAll(this.getPreimagen(a));
+    		}
+    		siguienteNivel = nuevoNivel;
     	}
     	
-    	A preimagen2 = this.getPreimagen(elemento2);
-    	while(preimagen2 != null) {
-    		ancestros2.add(preimagen2);
+    	siguienteNivel = this.getPreimagen(elemento2);
+    	while(!siguienteNivel.equals(Collections.emptySet())) {
+    		ancestros2.addAll(siguienteNivel);
+    		Set<A> nuevoNivel = new HashSet<>();
+    		for(A a : siguienteNivel) {
+    			nuevoNivel.addAll(this.getPreimagen(a));
+    		}    		
+    		siguienteNivel = nuevoNivel;
+
     	}
     	
     	if(ancestros1.size() == 1) {
