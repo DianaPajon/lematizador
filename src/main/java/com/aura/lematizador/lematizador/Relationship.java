@@ -121,7 +121,9 @@ public class Relationship<A> {
     	return profundidad;
     }
     
-    
+    /**
+     * Debe haber un algoritmo mejor, ponele, pero este pareciera que va a funcionar.
+     */
     public A getMayorAncestroComun(A elemento1, A elemento2) {
     	List<A> ancestros1 = new ArrayList<A>(Arrays.asList(elemento1));
     	List<A> ancestros2 =new ArrayList<A>(Arrays.asList(elemento2));
@@ -179,19 +181,11 @@ public class Relationship<A> {
     		} else {
     			//Esto debería pasar?
     			return null;
-    			
     		}
-    		
     	}
     	
     	/*
-    	 * El primer elemento común, es el primer elemento de ancestros1 que está también en ancestros2?
-    	 * Supongamos que fuera otro, X, ese estaría ANTES den ancestros1 y en ancestros 2. Por lo tanto, es un absurdo.
-    	 * Es el primero que vemos.
-    	 * 
-    	 * (Ponele)
-    	 * 
-    	 * (Cuadrático no es taaaaaan malo, ¿cuanta profunidad pueden tener estos árboles?)
+    	 * Este algoritmo no parece ser taaaan malo, ¿cuanta profundidad pueden tener estos árboles?)
     	 */
     	for(A elemento : ancestros1) {
     		if(ancestros2.contains(elemento)) {
