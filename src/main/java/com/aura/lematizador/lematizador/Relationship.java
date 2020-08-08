@@ -82,7 +82,7 @@ public class Relationship<A> {
     }
     
     public static <X> void addElement(Set<Relationship <X>> relaciones, String nombre, Pair<X,X> elemento){
-        for(Relationship rel: relaciones){
+        for(Relationship<X> rel: relaciones){
             int tipo = 0;
             if(rel.getNombreDirecto().equals(nombre)){
                 tipo = 1;
