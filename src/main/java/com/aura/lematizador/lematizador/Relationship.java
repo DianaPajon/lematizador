@@ -105,7 +105,7 @@ public class Relationship<A> {
         }
     }
     
-    public int profundidad(A elemento) {
+    public int getProfundidad(A elemento) {
     	Set<A> preImagen = this.getPreimagen(elemento);
     	if(preImagen.equals(Collections.emptySet())) {
     		return 0;

@@ -170,9 +170,22 @@ public class Lematizador {
     	return this.relacionesLexicograficas.get(relacion).getPreimagen(origen);
     }
     /*
-     * 
+     * Necesitamos mucha optimización, pero por ahora va a funcionar. Si una palabra maneja muchos
+     * conceptos, esto deja de andar.
      */
-    public SynSet lcs(SynSet set1, SynSet set2) {
-    	return null; 
+    public SynSet lcs(String relacion, Set<SynSet> set1, Set<SynSet>set2) {
+    	SynSet lcs = null;
+    	int profundidad = 0;
+    	Relationship<SynSet> rel = this.relacionesSemanticas.get(relacion);
+    	for(SynSet s1 : set1) {
+    		for(SynSet s2 : set2) {
+    			SynSet commonSubsumer = rel.getMayorAncestroComun(s1,s2);
+    			if(rel.getProfundidad(commonSubsumer) > profundidad) {
+    				lcs = commonSubsumer;
+    				profundidad= rel.getProfundidad(lcs);
+    			}
+    		}
+    	}
+    	return lcs; 
     }
 }
