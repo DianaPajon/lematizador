@@ -129,7 +129,7 @@ public class Relationship<A> {
     /**
      * Debe haber un algoritmo mejor, ponele, pero este pareciera que va a funcionar.
      */
-    public A getMayorAncestroComun(A elemento1, A elemento2) {
+    public A getMenorAncestroComun(A elemento1, A elemento2) {
     	List<A> ancestros1 = new ArrayList<A>(Arrays.asList(elemento1));
     	List<A> ancestros2 =new ArrayList<A>(Arrays.asList(elemento2));
     	

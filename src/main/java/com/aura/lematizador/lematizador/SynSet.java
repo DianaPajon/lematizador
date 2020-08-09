@@ -46,20 +46,39 @@ public class SynSet {
     public void setClase(String clase) {
         this.clase = clase;
     }
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((clase == null) ? 0 : clase.hashCode());
+		result = prime * result + ((lema == null) ? 0 : lema.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		SynSet other = (SynSet) obj;
+		if (clase == null) {
+			if (other.clase != null)
+				return false;
+		} else if (!clase.equals(other.clase))
+			return false;
+		if (lema == null) {
+			if (other.lema != null)
+				return false;
+		} else if (!lema.equals(other.lema))
+			return false;
+		return true;
+	}
     
     
     
-    @Override
-    public boolean equals(Object o){
-        if(o instanceof SynSet){
-            return ((SynSet) o).getLema().toUpperCase() == this.getLema().toUpperCase() && ((SynSet) o).getClase().toUpperCase() == this.getClase().toUpperCase();
-        }
-        else
-            return false;
-    }
     
-    @Override
-    public int hashCode(){
-        return lema.hashCode();
-    }
 }

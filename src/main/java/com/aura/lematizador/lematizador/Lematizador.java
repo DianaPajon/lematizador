@@ -179,7 +179,7 @@ public class Lematizador {
     	Relationship<SynSet> rel = this.relacionesSemanticas.get(relacion);
     	for(SynSet s1 : set1) {
     		for(SynSet s2 : set2) {
-    			SynSet commonSubsumer = rel.getMayorAncestroComun(s1,s2);
+    			SynSet commonSubsumer = rel.getMenorAncestroComun(s1,s2);
     			if(rel.getProfundidad(commonSubsumer) > profundidad) {
     				lcs = commonSubsumer;
     				profundidad= rel.getProfundidad(lcs);
