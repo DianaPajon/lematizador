@@ -8,8 +8,12 @@ package com.aura.lematizador.lematizador;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -81,8 +85,9 @@ public class Relationship<A> {
         return imagen;
     }
     
-    public static <X> void addElement(Set<Relationship <X>> relaciones, String nombre, Pair<X,X> elemento){
-        for(Relationship<X> rel: relaciones){
+    public static <X> void addElement(Map<String, Relationship <X>> relaciones, String nombre, Pair<X,X> elemento){
+        for(Entry<String, Relationship<X>> entry: relaciones.entrySet()){
+        	Relationship<X> rel = entry.getValue();
             int tipo = 0;
             if(rel.getNombreDirecto().equals(nombre)){
                 tipo = 1;
@@ -196,4 +201,17 @@ public class Relationship<A> {
     	return null;
     }
     
+    @Override
+    public int hashCode() {
+    	return this.nombreDirecto.hashCode();
+    }
+    
+    @Override
+    public boolean equals(Object o) {
+    	if(o instanceof Relationship) {
+    		Relationship rela = (Relationship) o;
+    		return Objects.equals(this.getNombreDirecto(), rela.getNombreDirecto());
+    	}
+    	return false;
+    }
 }

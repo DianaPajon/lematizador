@@ -24,16 +24,16 @@ public class Lematizador {
     
     //Por qué no usé hashmap?, explicame?
     //TODO: Rehacer con hashmap.
-    private Set<Relationship<SynSet>> relacionesSemanticas;
-    private Set<Relationship<Word>> relacionesLexicograficas;
+    private Map<String, Relationship<SynSet>> relacionesSemanticas;
+    private Map<String, Relationship<Word>> relacionesLexicograficas;
     
     //Constructor por DOM.
     public Lematizador(Document documento){
         lemas = new HashSet<>();
-        relacionesSemanticas = new HashSet<>();
-        relacionesLexicograficas = new HashSet<>();
-        Set<Relationship<SynSet>> relacionesSemanticas = new HashSet();
-        Set<Relationship<Word>> relacionesLexicograficas = new HashSet();
+        relacionesSemanticas = new HashMap();
+        relacionesLexicograficas = new HashMap();
+        Map<String, Relationship<SynSet>> relacionesSemanticas = new HashMap();
+        Map<String, Relationship<Word>> relacionesLexicograficas = new HashMap();
         
         NodeList relaciones = documento.getElementsByTagName("relacion");
         for(int i = 0; i < relaciones.getLength(); i++){
@@ -46,11 +46,11 @@ public class Lematizador {
             switch(tipo.getNodeValue()){
                 case "sem":
                     Relationship<SynSet> synrel = new Relationship(directa.getNodeValue(), inversa!=null?inversa.getNodeValue():directa.getNodeValue());
-                    relacionesSemanticas.add(synrel);
+                    relacionesSemanticas.put(directa.getNodeValue(), synrel);
                     break;
                 case "lex":
                     Relationship<Word> lexrel = new Relationship(directa.getNodeValue(), inversa!=null?inversa.getNodeValue():directa.getNodeValue());
-                    relacionesLexicograficas.add(lexrel);
+                    relacionesLexicograficas.put(directa.getNodeValue(), lexrel);
                     break;
                 default:
                     break;
@@ -141,7 +141,7 @@ public class Lematizador {
         return lemas;
     }
 
-    public void setRelacionesLexicograficas(Set<Relationship<Word>> relacionesLexicograficas) {
+    public void setRelacionesLexicograficas(Map<String, Relationship<Word>> relacionesLexicograficas) {
         this.relacionesLexicograficas = relacionesLexicograficas;
     }
 
@@ -155,27 +155,24 @@ public class Lematizador {
 
     
     public Set<SynSet> relacionSemantica(String relacion, SynSet origen){
-        Set<SynSet> lemas = new HashSet<>();
-        for(Relationship<SynSet> rel : relacionesSemanticas){
-            if(rel.getNombreDirecto().equals(relacion)){
-                lemas.addAll(rel.getImagen(origen));
-            } else if (rel.getNombreInversa().equals(relacion)){
-                lemas.addAll(rel.getPreimagen(origen));
-            }
-        }
-        return lemas;
+       return this.relacionesSemanticas.get(relacion).getImagen(origen);
     }
     
+    public Set<SynSet> inversaSemantica(String relacion, SynSet origen){
+        return this.relacionesSemanticas.get(relacion).getPreimagen(origen);
+     }
     
     public Set<Word> relacionLexicografica(String relacion, Word origen){
-        Set<Word> palabras = new HashSet<>();
-        for(Relationship<Word> rel : relacionesLexicograficas){
-            if(rel.getNombreDirecto().equals(relacion)){
-                palabras.addAll(rel.getImagen(origen));
-            } else if (rel.getNombreInversa().equals(relacion)){
-                palabras.addAll(rel.getPreimagen(origen));
-            }
-        }
-        return palabras;
+    	return this.relacionesLexicograficas.get(relacion).getImagen(origen);
+    }    
+    
+    public Set<Word> inversaLexicografica(String relacion, Word origen){
+    	return this.relacionesLexicograficas.get(relacion).getPreimagen(origen);
+    }
+    /*
+     * 
+     */
+    public SynSet lcs(SynSet set1, SynSet set2) {
+    	return null; 
     }
 }
