@@ -14,6 +14,7 @@ import java.io.IOException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import opennlp.tools.stemmer.snowball.SnowballStemmer;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
@@ -34,12 +35,14 @@ public class Main {
         
 //Inicializo todas las relaciones.
         Lematizador lem = new Lematizador(doc);
+        SnowballStemmer stemmer = new SnowballStemmer(SnowballStemmer.ALGORITHM.SPANISH);
         for(SynSet s : lem.encontrarLema(new Word("claro"))){
-            System.out.println(s.getLema());
+            System.out.println(stemmer.stem(s.getLema()));
         };
         
         for(Word s : lem.relacionLexicografica("antonimo", new Word("Claro"))){
-            System.out.println(s.getPalabra());
+        	   
+            System.out.println(stemmer.stem(stemmer.stem(s.getPalabra())));
         }
         
     }
