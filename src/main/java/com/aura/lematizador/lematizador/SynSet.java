@@ -73,7 +73,7 @@ public class SynSet {
 		if (lema == null) {
 			if (other.lema != null)
 				return false;
-		} else if (!lema.equals(other.lema))
+		} else if (!lema.toUpperCase().equals(other.lema.toUpperCase()))
 			return false;
 		return true;
 	}
