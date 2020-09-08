@@ -34,13 +34,13 @@ public class Word {
     public boolean equals(Object o){
     	
         if(o instanceof Word){
-            return Objects.equals(stemmer.stem(((Word) o).getPalabra().toUpperCase()), stemmer.stem(this.palabra.toUpperCase()));
+            return Objects.equals(stemmer.stem(((Word) o).getPalabra().toUpperCase()).toString(), stemmer.stem(this.palabra.toUpperCase()).toString());
         }
         return false;
     }
     
     @Override
     public int hashCode(){
-        return this.palabra.hashCode();
+        return this.palabra.toUpperCase().hashCode();
     }
 }
