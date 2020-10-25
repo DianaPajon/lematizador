@@ -5,6 +5,7 @@
  */
 package com.aura.lematizador.lematizador;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -141,6 +142,11 @@ public class Lematizador {
                 lemas.add(s);
             }
         }
+        if(lemas.equals(Collections.emptySet())){
+            SynSet nuevo = new SynSet(w.getPalabra());
+            nuevo.getInstancias().add(w);
+            lemas.add(nuevo);
+        }
         return lemas;
     }
 
@@ -184,6 +190,7 @@ public class Lematizador {
     }
     
     public int profundidad(String relacion, SynSet lema) {
+        if(lema == null) return 0;
     	Relationship<SynSet> rel = this.relacionesSemanticas.get(relacion);
     	return rel.getProfundidad(lema);
     }

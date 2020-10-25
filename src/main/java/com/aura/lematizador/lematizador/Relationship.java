@@ -108,9 +108,9 @@ public class Relationship<A> {
     public int getProfundidad(A elemento) {
     	Set<A> preImagen = this.getPreimagen(elemento);
     	if(preImagen.equals(Collections.emptySet())) {
-    		return 0;
+    		return 1;
     	}
-    	int profundidad = 0;
+    	int profundidad = 1;
     	Set<Set<A>> siguienteNivel = new HashSet<Set<A>>();
     	siguienteNivel.add(preImagen);
     	while(siguienteNivel.stream().allMatch(s->!s.equals(Collections.emptySet()))){
@@ -173,20 +173,9 @@ public class Relationship<A> {
     	}
     	
     	if(ancestros2.size() == 1) {
-    		if(ancestros1.size() == 1) {
-    			if(elemento1.equals(elemento2)) {
-    				return elemento1;
-    			}else {
-    				//Esto debería pasar?
-    				return null;
-    			}
-    		}
-    		if(ancestros1.contains(elemento1)) {
-    			return elemento2;
-    		} else {
-    			//Esto debería pasar?
-    			return null;
-    		}
+                if(ancestros1.contains(elemento2)){
+                    return elemento2;
+                }
     	}
     	
     	/*

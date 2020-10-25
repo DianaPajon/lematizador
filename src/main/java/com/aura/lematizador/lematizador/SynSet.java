@@ -6,6 +6,7 @@
 package com.aura.lematizador.lematizador;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -19,6 +20,7 @@ public class SynSet {
     
     public SynSet(String lema){
         this.lema = lema;
+        this.instancias = new HashSet<>();
     }
     
     private static Collection<Relationship> relaciones;
